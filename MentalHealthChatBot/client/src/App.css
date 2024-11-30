@@ -1,0 +1,32 @@
+/* @import '~antd/dist/antd.css'; */
+
+body {
+  background-color: #f0f2f5;
+}
+
+.flashcard {
+  transition: all 0.3s;
+}
+
+.flashcard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.ant-upload-drag {
+  border: 2px dashed #1890ff;
+}
+
+.ant-upload-drag:hover {
+  border-color: #40a9ff;
+}
+
+.ant-input-search-button {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+.ant-input-search-button:hover {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}

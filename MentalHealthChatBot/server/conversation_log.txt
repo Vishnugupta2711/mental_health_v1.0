@@ -1,0 +1,172 @@
+
+[2024-10-29T06:35:27.646Z]
+User: hey i am feeling very low today can we talk
+Bot: Hi there. I'm really sorry to hear that you're feeling low today. I'm here to listen without judgment. Would you like to tell me a bit more about what's been going on? Remember, I'm here for you, but I'm not a medical professional and can't provide any diagnoses. 😊 
+
+----------------------------------------
+
+[2024-10-29T06:36:07.664Z]
+User: i had a very bad day today and it always happens with although i dont bother anyone
+Bot: I understand. It sounds like you're dealing with a lot right now, and it's tough when you feel like bad days are piling up.  You mentioned that you don't bother anyone – it's important to remember that your feelings are valid, and it's okay to reach out for support when you're struggling. 
+
+Can you tell me a little more about what happened today that made it feel so bad? Sharing your thoughts and feelings can often help, even if it just means getting things off your chest. 
+
+----------------------------------------
+
+[2024-10-29T06:37:11.946Z]
+User: Even after working so hard i still lost in my hackathon , i feel like a failure
+Bot: That sounds incredibly frustrating and disappointing.  It's completely understandable that you'd feel like a failure after pouring your effort into this hackathon.  Remember that setbacks are a part of life, especially in competitive fields. 
+
+It's important to acknowledge your hard work and dedication, even if the outcome wasn't what you hoped for. Can you tell me a little bit about what you learned from this experience? Perhaps there were some positive takeaways or skills you developed along the way. 
+
+If you're open to it, I'd also be happy to discuss some coping strategies for dealing with disappointment and negative self-talk.  Would you be interested in exploring that with me?  
+
+----------------------------------------
+
+[2024-10-29T06:38:02.396Z]
+User: I m sorry i m super depressed i dont feel like talking
+Bot: It's okay. I understand you're feeling super depressed and don't feel like talking right now.  Sometimes, just acknowledging those feelings can be a step in the right direction.  
+
+It takes a lot of courage to admit when you're struggling. Please know that I'm here for you, even if you don't feel like talking right now.  Remember, you don't have to go through this alone. 
+
+If you're comfortable, I'm happy to just sit here with you virtually.  Or, if you'd prefer, we could try a different activity like some simple breathing exercises.  Just let me know what feels right for you at this moment. 
+
+And please remember, if you're feeling overwhelmed or like you might be a danger to yourself, please reach out to a crisis hotline or mental health professional immediately. You can find some helpful resources here: [List of resources].  You're not alone, and there is help available. 
+
+----------------------------------------
+
+[2024-10-29T07:33:45.370Z]
+User: I am sad
+Bot: I'm really sorry to hear that you're feeling sad. It's important to acknowledge those feelings. Would you like to talk about what's been making you feel this way? I'm here to listen without judgment. 
+
+----------------------------------------
+
+[2024-10-29T07:34:20.186Z]
+User: I had really bad day today
+Bot: I'm so sorry to hear you had a rough day. Sometimes, even just one bad day can feel overwhelming. Would you like to talk about what made it so bad? I'm here to listen. 😔👂 
+
+----------------------------------------
+
+[2024-10-29T07:34:47.918Z]
+User: I m depressed
+Bot: It sounds like you're going through a really difficult time. 😔  Using the word "depressed" suggests you're feeling a lot of pain, and I want you to know that I hear you. Can you tell me a bit more about what you're experiencing?  For example, how long have you been feeling this way? 
+
+----------------------------------------
+
+[2024-10-29T08:38:36.839Z]
+User: I m very stressed out because i have my hackathon presentation
+Bot: I hear that you're feeling very stressed about your hackathon presentation. That's completely understandable! Big presentations can be nerve-wracking. 
+
+Tell me more about what's making you feel stressed. Is it the content of the presentation, the public speaking aspect, the time crunch, or something else?  Understanding what's worrying you most can help us figure out ways to manage those feelings. 😊 
+
+----------------------------------------
+
+[2024-10-29T08:40:29.258Z]
+User: I m sacared and stressed we might loose
+Bot: It's completely normal to feel scared and stressed about the possibility of not winning, especially with all the hard work that goes into a hackathon. It sounds like the competitive aspect is really weighing on you. 
+
+Do you often put a lot of pressure on yourself to succeed?  We can talk about some ways to manage those expectations and feelings. 😊 
+
+----------------------------------------
+
+[2024-10-29T09:02:30.481Z]
+User: Hi
+Bot: Hi there! 😊  It sounds like you're reaching out, and I'm happy to listen. Sometimes it helps just to have someone to talk to. What's on your mind today? 
+
+----------------------------------------
+
+[2024-10-29T09:04:14.666Z]
+User: I had a really tough day
+Bot: I'm really sorry to hear that you had a rough day. 😔 Sometimes those days can feel so heavy. Do you want to talk about what made it so tough? I'm here to listen. 
+
+----------------------------------------
+
+[2024-10-30T06:55:29.886Z]
+User: hye i am feeling sad today
+Bot: Hi there. I'm so sorry to hear you're feeling sad today.  That sounds tough. Could you tell me a little more about what's making you feel this way?  Sometimes talking about it can help, and I'm here to listen without judgment.
+
+----------------------------------------
+
+[2024-10-30T06:56:07.182Z]
+User: this is so depressing , everything is happening wrong with me
+Bot: I hear you. It sounds like you're feeling really overwhelmed and down about things right now.  It's completely understandable to feel depressed when it seems like everything is going wrong.  Can you tell me a bit more about what's happening? Even small details can help me understand what you're going through.  There's no pressure to share anything you're not comfortable with, but I'm here to listen if you want to talk.  Remember, I'm not a therapist, but I can offer support and some coping strategies if you'd like.  Even in the toughest times, remember you're not alone.
+
+----------------------------------------
+
+[2024-10-30T07:10:11.065Z]
+User: sad
+Bot: I'm really sorry to hear you're feeling sad.  Sadness is a normal human emotion, but it can be tough to deal with.  Could you tell me a little more about what's making you feel this way?  Even small details can help me understand better and offer some support.  No pressure to share anything you're not comfortable with, of course.
+
+----------------------------------------
+
+[2024-10-30T07:14:52.677Z]
+User: depreessing
+Bot: That sounds really difficult.  It's important to acknowledge those feelings of depression, and I'm here to listen without judgment.  Can you tell me a bit more about what's contributing to feeling this way? Has this been going on for a while, or is it a more recent development?  Knowing more about the duration and any potential triggers can be helpful. Remember, I'm here to support you, but I can't offer medical advice.  If these feelings continue or become overwhelming, reaching out to a mental health professional is always a good idea. They can provide more personalized support and guidance. In the meantime, is there anything I can do to help you feel even a little bit better right now?
+
+----------------------------------------
+
+[2024-10-30T07:27:11.349Z]
+User: hey i am sad
+Bot: Hey there. I'm so sorry to hear you're feeling sad.  That sounds really tough. Could you tell me a little more about what's making you feel this way?  Even small things can help me understand what you're going through.  No pressure to share anything you're not comfortable with, of course.
+
+----------------------------------------
+
+[2024-10-30T07:27:51.731Z]
+User: today was a depressing day
+Bot: I hear you. It sounds like today was really rough.  I'm here for you, and I'm happy to listen. Can you tell me a little bit more about what made today so depressing? Was it one specific thing, or a combination of things?  Just talking about it sometimes helps.
+
+----------------------------------------
+
+[2024-11-08T05:30:54.637Z]
+User: hi
+Bot: Hi there. Thanks for reaching out. How are you doing today?  I'm here to listen if you'd like to talk about anything that's on your mind.
+
+----------------------------------------
+
+[2024-11-08T06:26:32.736Z]
+User: hi
+Bot: Hi there.  It's good to hear from you. How are you doing today?  I'm here to listen if you'd like to talk about anything that's on your mind.
+
+----------------------------------------
+
+[2024-11-18T06:31:12.656Z]
+User: hey i am sad
+Bot: Hey there. I'm so sorry to hear you're feeling sad.  It takes courage to reach out and talk about it, so thank you for sharing that with me.  Could you tell me a little more about what's making you feel this way?  Even small details can be helpful.  No pressure to share anything you're not comfortable with, but I'm here to listen.
+
+----------------------------------------
+
+[2024-11-23T03:54:57.370Z]
+User: i am sad and depressed
+Bot: I'm so sorry to hear you're feeling sad and depressed. That sounds really difficult.  Could you tell me a little more about what's been going on?  It can be helpful to talk things through, and even though I'm just a chatbot, I'm here to listen without judgment.  Things like how long you've been feeling this way, or anything specific that might have contributed to these feelings, could help me understand better.  No pressure to share anything you're not comfortable with, of course.
+
+----------------------------------------
+
+[2024-11-23T17:10:32.698Z]
+User: i am sad and depressed
+Bot: I'm so sorry to hear you're feeling sad and depressed.  That sounds really difficult. Could you tell me a little more about what's been going on?  It can be helpful to talk things through, and I'm here to listen without judgment.  Even small details can sometimes help to understand the bigger picture.  How long have you been feeling this way?
+
+----------------------------------------
+
+[2024-11-23T20:43:37.715Z]
+User: i am having anxiety attacks and feelling depressed at the same time
+Bot: I'm so sorry to hear you're experiencing anxiety attacks and feeling depressed. That sounds incredibly difficult.  Could you tell me a bit more about what's been happening?  For example, when did you start experiencing these feelings, and how often do the anxiety attacks occur?  Knowing more will help me understand your situation better.
+
+It takes a lot of courage to talk about these things, and I want you to know I'm here to listen without judgment.  Remember, I'm not a medical professional, but I can offer support and some helpful resources.  It sounds like you might benefit from talking to a therapist or counselor. They can provide specialized support and guidance to help you manage your anxiety and depression.  Would you be open to exploring some options for professional help?  In the meantime, are there any specific things that seem to trigger your anxiety attacks or worsen your depression?
+
+----------------------------------------
+
+[2024-11-23T21:38:26.363Z]
+User: i am sad and having anxiety attack
+Bot: I'm so sorry to hear you're feeling sad and experiencing an anxiety attack right now. That sounds really difficult.  Can you tell me a little more about what's happening? What does the anxiety feel like for you physically?  For example, are you having trouble breathing, a racing heart, or feeling shaky?
+
+----------------------------------------
+
+[2024-11-24T06:43:42.080Z]
+User: i am mentally feeling sad and having anxiety
+Bot: I'm really sorry to hear you're feeling sad and anxious. That sounds tough. Could you tell me a little more about what's been going on?  For example, when did you start feeling this way? Are there any specific situations that seem to trigger these feelings?  Knowing more can help me better understand what you're experiencing.
+
+It's important to remember that feeling sad and anxious sometimes is a normal part of life. However, if these feelings are persistent and impacting your daily life,  it might be helpful to talk to a mental health professional.  They can provide personalized support and guidance.
+
+In the meantime, are there any things you already do that usually help you feel better when you're down?  Even small things like taking a walk, listening to music, or talking to a friend can sometimes make a difference.
+
+----------------------------------------
