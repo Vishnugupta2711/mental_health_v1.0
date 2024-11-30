@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Make iframe transparent */
+.goog-te-banner-frame {
+  display: none !important; /* Hides the top Google Translate banner */
+}
+
+.goog-te-gadget {
+  background: transparent !important;
+  border: none !important;
+}
