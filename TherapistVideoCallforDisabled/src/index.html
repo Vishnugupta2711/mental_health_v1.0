@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Video Conference</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/app.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Detection</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #151C2B, #7337D6);
+            --secondary-gradient: linear-gradient(135deg, #7337D6, #151C2B);
+            --text-primary: #fff;
+            --accent-color: #7337D6;
+        }
+
+        /* Animated Background */
+        .bg-animation-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+        }
+
+        .floating-shapes div {
+            position: absolute;
+            display: flex;
+            opacity: 0.15;
+            animation: float 15s infinite linear;
+            background: linear-gradient(135deg, #7337D6, transparent);
+            border-radius: 50%;
+        }
+
+        .shape1 {
+            width: 80px;
+            height: 80px;
+            left: 25%;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 120px;
+            height: 120px;
+            left: 45%;
+            animation-delay: 2s;
+        }
+
+        .shape3 {
+            width: 60px;
+            height: 60px;
+            left: 75%;
+            animation-delay: 4s;
+        }
+
+        .shape4 {
+            width: 100px;
+            height: 100px;
+            left: 15%;
+            animation-delay: 6s;
+        }
+
+        .shape5 {
+            width: 90px;
+            height: 90px;
+            left: 85%;
+            animation-delay: 8s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translateY(50vh) rotate(180deg) scale(1.5);
+                opacity: 0.15;
+            }
+
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Glowing Effect */
+        .glow {
+            position: absolute;
+            width: 40%;
+            height: 40%;
+            background: radial-gradient(circle, rgba(115, 55, 214, 0.2), transparent 70%);
+            border-radius: 50%;
+            animation: glow 10s infinite alternate;
+        }
+
+        .glow-1 {
+            top: -20%;
+            left: -20%;
+        }
+
+        .glow-2 {
+            bottom: -20%;
+            right: -20%;
+            animation-delay: 5s;
+        }
+
+        @keyframes glow {
+            0% {
+                transform: scale(1) translate(0, 0);
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: scale(1.5) translate(10%, 10%);
+                opacity: 0.1;
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            background: transparent;
+            min-height: 100vh;
+        }
+
+        /* Enhanced Glassmorphism */
+        .glass-effect {
+            background: rgba(21, 28, 43, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(115, 55, 214, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            background: rgba(21, 28, 43, 0.85) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(115, 55, 214, 0.2);
+            padding: 1rem 1.5rem;
+            animation: fadeInDown 0.5s ease-out;
+        }
+
+        /* Enhanced Buttons */
+        .btn-modern {
+            background: rgba(115, 55, 214, 0.2);
+            border: 1px solid rgba(115, 55, 214, 0.3);
+            backdrop-filter: blur(5px);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.2),
+                    transparent);
+            transition: 0.5s;
+        }
+
+        .btn-modern:hover::before {
+            left: 100%;
+        }
+
+        .btn-modern:hover {
+            background: rgba(115, 55, 214, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(115, 55, 214, 0.3);
+        }
+
+        /* Enhanced Room Container */
+        .room-container {
+            background: rgba(21, 28, 43, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(115, 55, 214, 0.2);
+            margin-top: 2rem;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        /* Enhanced Form Controls */
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(115, 55, 214, 0.2);
+            color: white;
+            border-radius: 8px;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-color);
+            color: white;
+            box-shadow: 0 0 20px rgba(115, 55, 214, 0.3);
+        }
+
+        /* Enhanced Video Elements */
+        .local-video {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(115, 55, 214, 0.3);
+            transition: all 0.3s ease;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .video-container {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .video-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 12px;
+            box-shadow: inset 0 0 20px rgba(115, 55, 214, 0.3);
+            pointer-events: none;
+        }
+
+        .video-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(115, 55, 214, 0.3);
+        }
+
+        /* Enhanced Control Buttons */
+        .control-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            background: rgba(115, 55, 214, 0.2);
+            border: 1px solid rgba(115, 55, 214, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* New active state for control buttons */
+        .control-btn.active {
+            background: rgba(115, 55, 214, 0.8);
+            box-shadow: 0 0 15px rgba(115, 55, 214, 0.5);
+            transform: scale(1.1);
+        }
+
+        .control-btn.active i {
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Enhanced transcript container */
+        .transcript-container {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 800px;
+            background: rgba(21, 28, 43, 0.98);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 20px;
+            z-index: 9999;
+            border: 2px solid rgba(115, 55, 214, 0.4);
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        /* New styles for transcript messages */
+        .transcript-message {
+            margin-bottom: 12px;
+            padding: 10px 15px;
+            border-radius: 12px;
+            background: rgba(115, 55, 214, 0.15);
+            display: flex;
+            align-items: flex-start;
+            animation: fadeIn 0.3s ease-out;
+            border: 1px solid rgba(115, 55, 214, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .transcript-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: rgba(115, 55, 214, 0.5);
+        }
+
+        .transcript-user {
+            font-weight: 600;
+            color: #7337D6;
+            margin-right: 12px;
+            flex-shrink: 0;
+            position: relative;
+            padding-right: 12px;
+        }
+
+        .transcript-user::after {
+            content: '•';
+            position: absolute;
+            right: 0;
+            color: rgba(115, 55, 214, 0.5);
+        }
+
+        .transcript-text {
+            color: white;
+            word-break: break-word;
+            line-height: 1.5;
+        }
+
+        /* Status indicator */
+        .status-indicator {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(21, 28, 43, 0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: white;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 9999;
+        }
+
+        .status-indicator.active {
+            opacity: 1;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4CAF50;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Instructions panel */
+        .instructions-panel {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 300px;
+            background: rgba(21, 28, 43, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(115, 55, 214, 0.3);
+            color: white;
+            z-index: 9998;
+            transform: translateX(320px);
+            transition: transform 0.3s ease;
+        }
+
+        .instructions-panel.active {
+            transform: translateX(0);
+        }
+
+        .instruction-step {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(115, 55, 214, 0.1);
+            border: 1px solid rgba(115, 55, 214, 0.2);
+        }
+
+        .instruction-step i {
+            color: #7337D6;
+            margin-right: 8px;
+        }
+
+        /* Enhanced animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+
+        .sign-language-container {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .sign-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .sign-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #1a1a1a;
+        }
+
+        .toggle-button {
+            background: #7337d6;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-button:hover {
+            background: #5925ac;
+        }
+
+        .toggle-button i {
+            font-size: 1rem;
+        }
+
+        #sign-canvas {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+            background: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .sign-alert {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 12px;
+        }
+
+        .sign-alert-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #1a1a1a;
+        }
+
+        .sign-alert-description {
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation-container">
+        <div class="bg-gradient"></div>
+        <div class="floating-shapes">
+            <div class="shape1"></div>
+            <div class="shape2"></div>
+            <div class="shape3"></div>
+            <div class="shape4"></div>
+            <div class="shape5"></div>
+        </div>
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+    </div>
+
+    <!-- Recording Modal -->
+    <div class="custom-modal" id='recording-options-modal'>
+        <div class="custom-modal-content glass-effect">
+            <div class="row text-center">
+                <div class="col-md-6 mb-2">
+                    <div class="record-option ripple" id='record-video'>
+                        <i class="fas fa-video fa-2x mb-2"></i>
+                        <div>Record video</div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="record-option ripple" id='record-screen'>
+                        <i class="fas fa-desktop fa-2x mb-2"></i>
+                        <div>Record screen</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-modern text-white ripple" id='closeModal'>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top d-print-none">
+        <div class="text-white h5 mb-0">Video Conference </div>
+        <div class="pull-right room-comm" hidden>
+            <span class="text-white mr-4">
+                Room ID: <span class="badge badge-modern" id='randomNumber'></span>
+            </span>
+
+            <button class="control-btn" id='toggle-video' title="Toggle Video">
+                <i class="fa fa-video text-white"></i>
+            </button>
+
+            <button class="control-btn" id='toggle-mute' title="Toggle Mute">
+                <i class="fa fa-microphone-alt text-white"></i>
+            </button>
+
+            <button class="control-btn" id='share-screen' title="Share Screen">
+                <i class="fa fa-desktop text-white"></i>
+            </button>
+
+            <button class="control-btn" id='record' title="Record">
+                <i class="fa fa-dot-circle text-white"></i>
+            </button>
+
+            <button class="control-btn" id='toggle-chat-pane'>
+                <i class="fa fa-comment text-white"></i>
+                <span class="badge badge-danger badge-modern very-small font-weight-lighter" id='new-chat-notification'
+                    hidden>New</span>
+            </button>
+
+            <button class="control-btn">
+                <a href="/" class="text-white">
+                    <i class="fa fa-sign-out-alt" title="Leave"></i>
+                </a>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Create Room Container -->
+    <div class="container" id='room-create' hidden>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="room-container">
+                    <h2 class="text-center mb-4">Create Room</h2>
+                    <div class="text-center">
+                        <span class="form-text small text-danger" id='err-msg'></span>
+                    </div>
+                    <div class="mb-4">
+                        <label for="room-name">Room Name</label>
+                        <input type="text" id='room-name' class="form-control" placeholder="Enter room name">
+                    </div>
+                    <div class="mb-4">
+                        <label for="your-name">Your Name</label>
+                        <input type="text" id='your-name' class="form-control" placeholder="Enter your name">
+                    </div>
+                    <button id='create-room' class="btn btn-modern btn-block text-white">Create Room</button>
+                    <div id='room-created' class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Username Container -->
+    <div class="container" id='username-set' hidden>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="room-container">
+                    <h2 class="text-center mb-4">Enter Your Name</h2>
+                    <div class="text-center">
+                        <span class="form-text small text-danger" id='err-msg-username'></span>
+                    </div>
+                    <div class="mb-4">
+                        <label for="username">Your Name</label>
+                        <input type="text" id='username' class="form-control" placeholder="Enter your name">
+                    </div>
+                    <button id='enter-room' class="btn btn-modern btn-block text-white">Join Room</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Room Container -->
+    <div class="container-fluid room-comm" hidden>
+        <div class="row">
+            <div class="video-wrapper">
+                <video class="local-video mirror-mode" id='local' volume='0' autoplay muted></video>
+                <div class="caption-container">
+                    <div class="caption-text" id="local-caption"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 main" id='main-section'>
+                <div class="row mt-2 mb-2" id='videos'></div>
+            </div>
+
+            <div class="col-md-3 chat-col d-print-none mb-2" id='chat-pane' hidden>
+                <div class="row">
+                    <div class="col-12 text-center h4 mb-3">Chat</div>
+                </div>
+
+                <div id='chat-messages'></div>
+
+                <form>
+                    <div class="input-group mb-3">
+                        <textarea id="chat-input" class="form-control chat-box" rows='3'
+                            placeholder="Type your message..."></textarea>
+                        <div class="input-group-append" id='chat-input-btn'>
+                            <button type="button" class="btn btn-modern text-white">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Updated Transcript Container - Move it before closing body tag -->
+    <div class="transcript-container" id="transcript-container">
+        <!-- Initial message to show container is working -->
+        <div class="transcript-message">
+            <span class="transcript-user">System:</span>
+            <span class="transcript-text">Transcription ready. Start speaking when unmuted.</span>
+        </div>
+    </div>
+    <div class="sign-language-container">
+        <div class="sign-header">
+            <h4>Sign Language Detection</h4>
+            <button class="toggle-button" id="toggleDetection">
+                <i class="fas fa-hand"></i>
+                <span>Start</span>
+            </button>
+        </div>
+        <canvas id="sign-canvas" class="hidden"></canvas>
+        <div class="sign-alert">
+            <div class="sign-alert-title" id="modelStatus">Loading...</div>
+            <div class="sign-alert-description" id="detectedSign">No sign detected</div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src='/socket.io/socket.io.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/7.3.0/adapter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js'></script>
+    <script src='https://cdn.rawgit.com/yahoo/xss-filters/master/dist/xss-filters.js'></script>
+
+    <!-- Speech Recognition Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if speech recognition is supported
+            if (!('webkitSpeechRecognition' in window)) {
+                console.error('Speech recognition not supported');
+                return;
+            }
+
+            let recognition = null;
+            let isRecognitionActive = false;
+
+            function initializeRecognition() {
+                recognition = new webkitSpeechRecognition();
+                recognition.continuous = true;
+                recognition.interimResults = true;
+                recognition.lang = 'en-US'; // Set language explicitly
+
+                const transcriptContainer = document.getElementById('transcript-container');
+
+                function addTranscriptMessage(username, text) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'transcript-message';
+
+                    const userSpan = document.createElement('span');
+                    userSpan.className = 'transcript-user';
+                    userSpan.textContent = username + ':';
+
+                    const textSpan = document.createElement('span');
+                    textSpan.className = 'transcript-text';
+                    textSpan.textContent = ' ' + text;
+
+                    messageDiv.appendChild(userSpan);
+                    messageDiv.appendChild(textSpan);
+                    transcriptContainer.appendChild(messageDiv);
+
+                    transcriptContainer.scrollTop = transcriptContainer.scrollHeight;
+
+                    while (transcriptContainer.children.length > 50) {
+                        transcriptContainer.removeChild(transcriptContainer.firstChild);
+                    }
+                }
+
+                recognition.onstart = () => {
+                    console.log('Speech recognition started');
+                    isRecognitionActive = true;
+                    addTranscriptMessage('System', 'Speech recognition active - Start speaking');
+                };
+
+                recognition.onend = () => {
+                    console.log('Speech recognition ended');
+                    isRecognitionActive = false;
+                    // Restart recognition if it was supposed to be active
+                    if (!document.getElementById('local').muted) {
+                        recognition.start();
+                    }
+                };
+
+                recognition.onresult = (event) => {
+                    const results = event.results;
+
+                    for (let i = event.resultIndex; i < results.length; i++) {
+                        if (results[i].isFinal) {
+                            const transcript = results[i][0].transcript;
+                            if (transcript.trim().length > 0) {  // Only add non-empty transcripts
+                                addTranscriptMessage(window.username || 'You', transcript);
+
+                                // Emit to other users
+                                if (window.socket) {
+                                    window.socket.emit('caption', {
+                                        caption: transcript,
+                                        sender: window.username || 'You'
+                                    });
+                                }
+                            }
+                        }
+                    }
+                };
+
+                recognition.onerror = (event) => {
+                    console.error('Speech recognition error:', event.error);
+                    addTranscriptMessage('System', 'Error: ' + event.error);
+
+                    // Restart recognition on error if it was supposed to be active
+                    if (!document.getElementById('local').muted && event.error !== 'no-speech') {
+                        setTimeout(() => {
+                            recognition.start();
+                        }, 1000);
+                    }
+                };
+
+                return recognition;
+            }
+
+            // Initialize speech recognition
+            recognition = initializeRecognition();
+
+            // Handle mute/unmute
+            const toggleMuteButton = document.getElementById('toggle-mute');
+            if (toggleMuteButton) {
+                toggleMuteButton.addEventListener('click', () => {
+                    const localVideo = document.getElementById('local');
+
+                    // Toggle mute state
+                    localVideo.muted = !localVideo.muted;
+
+                    if (!localVideo.muted) {
+                        // Start recognition if unmuted
+                        try {
+                            recognition.start();
+                            console.log('Starting speech recognition');
+                        } catch (e) {
+                            console.log('Restarting recognition due to error:', e);
+                            recognition = initializeRecognition();
+                            recognition.start();
+                        }
+                    } else {
+                        // Stop recognition if muted
+                        try {
+                            recognition.stop();
+                            console.log('Stopping speech recognition');
+                        } catch (e) {
+                            console.error('Error stopping recognition:', e);
+                        }
+                    }
+                });
+            }
+
+            // Handle incoming captions from other users
+            if (window.socket) {
+                window.socket.on('caption', (data) => {
+                    const transcriptContainer = document.getElementById('transcript-container');
+                    if (transcriptContainer) {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = 'transcript-message';
+
+                        const userSpan = document.createElement('span');
+                        userSpan.className = 'transcript-user';
+                        userSpan.textContent = data.sender + ':';
+
+                        const textSpan = document.createElement('span');
+                        textSpan.className = 'transcript-text';
+                        textSpan.textContent = ' ' + data.caption;
+
+                        messageDiv.appendChild(userSpan);
+                        messageDiv.appendChild(textSpan);
+                        transcriptContainer.appendChild(messageDiv);
+
+                        transcriptContainer.scrollTop = transcriptContainer.scrollHeight;
+                    }
+                });
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const canvas = document.getElementById('sign-canvas');
+            const toggleButton = document.getElementById('toggleDetection');
+            const modelStatus = document.getElementById('modelStatus');
+            const detectedSignElement = document.getElementById('detectedSign');
+            let handposeModel = null;
+            let isActive = false;
+            let requestId = null;
+
+            const signs = {
+                'HELLO': {
+                    description: 'Open palm with all fingers spread (like high five)',
+                    check: (landmarks) => {
+                        const palm = landmarks[0];
+                        const fingertips = [landmarks[4], landmarks[8], landmarks[12], landmarks[16], landmarks[20]];
+
+                        // Check if all fingers are extended (significantly above the palm)
+                        const allFingersExtended = fingertips.every(tip => {
+                            return (palm[1] - tip[1]) > 50; // Fingers should be at least 50 pixels above palm
+                        });
+
+                        // Check if fingers are spread apart
+                        const isSpread = fingertips.every((tip, i) => {
+                            if (i === 0) return true;
+                            const prevTip = fingertips[i - 1];
+                            return Math.abs(tip[0] - prevTip[0]) > 30; // At least 30 pixels apart horizontally
+                        });
+
+                        return allFingersExtended && isSpread;
+                    }
+                },
+                'YES': {
+                    description: 'Closed fist (all fingers folded)',
+                    check: (landmarks) => {
+                        const fingertips = [landmarks[4], landmarks[8], landmarks[12], landmarks[16], landmarks[20]];
+                        const palm = landmarks[0];
+
+                        // All fingers should be folded (tips close to palm)
+                        const allFingersFolded = fingertips.every(tip => {
+                            return Math.abs(tip[1] - palm[1]) < 30;
+                        });
+
+                        return allFingersFolded;
+                    }
+                },
+                'NO': {
+                    description: 'Thumbs down gesture',
+                    check: (landmarks) => {
+                        const thumb = landmarks[4];
+                        const otherFingers = [landmarks[8], landmarks[12], landmarks[16], landmarks[20]]; // index through pinky
+                        const palm = landmarks[0];
+
+                        // Check if thumb is pointing down (significantly below the palm)
+                        const thumbDown = (thumb[1] - palm[1]) > 50;
+
+                        // Check if other fingers are folded
+                        const otherFingersFolded = otherFingers.every(tip => {
+                            return Math.abs(tip[1] - palm[1]) < 30;
+                        });
+
+                        return thumbDown && otherFingersFolded;
+                    }
+                }
+            };
+
+            async function initializeHandpose() {
+                try {
+                    handposeModel = await handpose.load();
+                    modelStatus.textContent = 'Ready';
+                    toggleButton.disabled = false;
+                } catch (error) {
+                    modelStatus.textContent = 'Error loading model';
+                    console.error('Error loading HandPose model:', error);
+                }
+            }
+
+            async function detectSigns() {
+                if (!isActive || !handposeModel || !canvas) return;
+
+                const video = document.querySelector('video');
+                if (!video) return;
+
+                try {
+                    const hands = await handposeModel.estimateHands(video);
+
+                    if (hands.length > 0) {
+                        const landmarks = hands[0].landmarks;
+
+                        // Draw hand landmarks
+                        const ctx = canvas.getContext('2d');
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                        // Draw connections
+                        ctx.strokeStyle = '#7337d6';
+                        ctx.lineWidth = 2;
+                        for (let i = 0; i < landmarks.length - 1; i++) {
+                            ctx.beginPath();
+                            ctx.moveTo(landmarks[i][0], landmarks[i][1]);
+                            ctx.lineTo(landmarks[i + 1][0], landmarks[i + 1][1]);
+                            ctx.stroke();
+                        }
+
+                        // Draw points
+                        ctx.fillStyle = '#ffffff';
+                        landmarks.forEach(point => {
+                            ctx.beginPath();
+                            ctx.arc(point[0], point[1], 4, 0, 2 * Math.PI);
+                            ctx.fill();
+                        });
+
+                        // Check for signs
+                        for (const [sign, config] of Object.entries(signs)) {
+                            if (config.check(landmarks)) {
+                                detectedSignElement.textContent = `Detected Sign: ${sign}`;
+                                if (window.socket) {
+                                    window.socket.emit('sign_language', {
+                                        sign,
+                                        sender: window.username || 'You'
+                                    });
+                                }
+                                break;
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error in sign detection:', error);
+                }
+
+                requestId = requestAnimationFrame(detectSigns);
+            }
+
+            // Initialize canvas size
+            function initializeCanvas() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+
+            // Toggle detection
+            toggleButton.addEventListener('click', () => {
+                isActive = !isActive;
+                canvas.classList.toggle('hidden');
+
+                if (isActive) {
+                    toggleButton.innerHTML = '<i class="fas fa-pause"></i><span>Stop</span>';
+                    initializeCanvas();
+                    detectSigns();
+                } else {
+                    toggleButton.innerHTML = '<i class="fas fa-hand"></i><span>Start</span>';
+                    if (requestId) {
+                        cancelAnimationFrame(requestId);
+                    }
+                    detectedSignElement.textContent = 'No sign detected';
+                }
+            });
+
+            // Initialize
+            toggleButton.disabled = true;
+            await initializeHandpose();
+
+            // Handle window resize
+            window.addEventListener('resize', initializeCanvas);
+        });
+    </script>
+
+    <!-- Your existing rtc.js and events.js scripts -->
+    <script type="module" src='assets/js/rtc.js'></script>
+    <script type="module" src='assets/js/events.js'></script>
+    <script src='assets/js/autolink.js'></script>
+</body>
+
+</html>

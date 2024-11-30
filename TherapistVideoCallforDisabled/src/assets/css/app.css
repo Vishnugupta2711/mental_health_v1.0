@@ -1,0 +1,248 @@
+.chat-col {
+    right: -100vw;
+    bottom: 0;
+    top: 40.5px;
+    z-index: 1000;
+    position: fixed;
+    color: #fff;
+    padding: 15px 5px 40px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #151C2B, #7337D6);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chat-col.chat-opened {
+    right: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+#chat-messages {
+    height: 70vh;
+    margin-bottom: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(115, 55, 214, 0.5) rgba(21, 28, 43, 0.2);
+    padding: 10px;
+    backdrop-filter: blur(10px);
+}
+
+#chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+#chat-messages::-webkit-scrollbar-track {
+    background: rgba(21, 28, 43, 0.2);
+    border-radius: 3px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(115, 55, 214, 0.5);
+    border-radius: 3px;
+    transition: background 0.3s ease;
+}
+
+#chat-messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(115, 55, 214, 0.8);
+}
+
+.chat-box {
+    bottom: 0px;
+    right: 0;
+    position: absolute;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-box::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 300;
+    font-style: italic;
+}
+
+.chat-box:focus {
+    background: rgba(255, 255, 255, 0.15);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(115, 55, 214, 0.3);
+}
+
+.msg {
+    font-weight: 400;
+    font-size: 14px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    animation: messageAppear 0.3s ease-out;
+    max-width: 85%;
+}
+
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chat-card {
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.remote-video {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+
+
+}
+
+
+.container{
+    margin-top: 15rem;
+}
+.remote-video-controls {
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(21, 28, 43, 0.9), rgba(21, 28, 43, 0));
+    z-index: 300000;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.remote-video:hover + .remote-video-controls,
+.remote-video-controls:hover {
+    opacity: 1;
+}
+
+.local-video {
+    bottom: 20px;
+    left: 20px;
+    position: fixed;
+    width: 15vw;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.local-video:hover {
+    transform: scale(1.05);
+}
+
+.custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(21, 28, 43, 0.8);
+    backdrop-filter: blur(5px);
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(5px);
+    }
+}
+
+.custom-modal-content {
+    background: linear-gradient(135deg, #151C2B, #7337D6);
+    margin: 15% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pull-right{
+    display: flex;
+
+}
+
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .chat-col {
+        width: 100vw;
+        top: 47px;
+    }
+
+    .local-video {
+        width: 40vw;
+        bottom: 70px;
+        left: 10px;
+    }
+
+    .custom-modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .card {
+        width: 50%;
+        z-index: 1000;
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+    }
+}
