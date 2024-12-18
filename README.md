@@ -69,6 +69,18 @@ Individuals with physical challenges face critical barriers in accessing mental 
 **Watch the Demo:**  
 [YouTube - Accessible Mental Health Platform](https://youtu.be/cBjXdItvFVY)
 
+![Screenshot 2024-12-18 155347](https://github.com/user-attachments/assets/a350c2a7-6d51-448a-8670-5d169dcb9f65)
+
+![Screenshot 2024-12-18 160031](https://github.com/user-attachments/assets/4f2ab233-6ab6-4cd3-a6ed-de292a2a088c)
+
+![Screenshot 2024-12-18 155633](https://github.com/user-attachments/assets/659ad7b4-29b8-437c-93c0-98cba5083886)
+
+![Screenshot 2024-12-18 155610](https://github.com/user-attachments/assets/f84cbc92-d624-4204-be8a-3738f3c62e1f)
+
+![Screenshot 2024-12-18 155522](https://github.com/user-attachments/assets/a06f2774-4162-49bb-84f1-a216eb4b03bc)
+
+![Screenshot 2024-10-16 015710](https://github.com/user-attachments/assets/b4990874-96af-4b37-a6f4-0ecc471c5414)
+
 ![Screenshot 2024-10-16 015223](https://github.com/user-attachments/assets/70db01b4-00dc-453b-8ecf-5dced8c6c967)
 
 ---
