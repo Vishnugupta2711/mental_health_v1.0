@@ -62,6 +62,7 @@ Individuals with physical challenges face critical barriers in accessing mental 
 - **FaceAPI**: Pre-trained facial detection models.  
 - **Handpose**: Gesture recognition datasets.  
 
+![ad](https://github.com/user-attachments/assets/998ea16e-b509-41b2-943a-b0814aca4410)
 ---
 
 ## 🔗 Demo Video
