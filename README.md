@@ -1,4 +1,4 @@
-# Accessible Mental Health Platform
+# Aura+ Mental Health Platform
 
 **Revolutionizing mental health care through inclusive technology and accessibility-first solutions**
 
